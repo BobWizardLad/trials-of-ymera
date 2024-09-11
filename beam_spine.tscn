@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmo23afwmgis8"]
+[gd_scene load_steps=4 format=3 uid="uid://bmo23afwmgis8"]
+
+[ext_resource type="Script" path="res://beam_spine.gd" id="1_nexdo"]
 
 [sub_resource type="Curve" id="Curve_4xtth"]
 _data = [Vector2(0.105263, 0.681319), 0.0, -2.95187, 0, 0, Vector2(0.257895, 0.230769), 0.0, 0.0, 0, 0, Vector2(0.494737, 0.692308), 0.0, 0.0, 0, 0, Vector2(0.757895, 0.252747), 0.0, 0.0, 0, 0, Vector2(0.926316, 0.703297), 0.0, 0.0, 0, 0]
@@ -16,3 +18,9 @@ gradient = SubResource("Gradient_dnn0m")
 joint_mode = 2
 begin_cap_mode = 1
 end_cap_mode = 2
+script = ExtResource("1_nexdo")
+
+[node name="Lifespan" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Lifespan" to="." method="_on_lifespan_timeout"]

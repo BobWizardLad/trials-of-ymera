@@ -11,3 +11,9 @@ script = ExtResource("1_hq1lh")
 
 [node name="Sprite" type="Sprite2D" parent="PlayerBody"]
 texture = ExtResource("2_qkgey")
+
+[node name="AbilityTimer" type="Timer" parent="PlayerBody"]
+one_shot = true
+
+[node name="PrimaryTimer" type="Timer" parent="PlayerBody"]
+one_shot = true
