@@ -9,7 +9,9 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	look_at(get_global_mouse_position())
+	# Adjust length to mouse pos
+	for each in range(0, points.size()):
+		points[each] = each * get_local_mouse_position() * 1.4
 
 func _on_lifespan_timeout() -> void:
 	queue_free()

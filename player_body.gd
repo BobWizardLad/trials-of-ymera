@@ -5,18 +5,17 @@ var beam_spine_asset: PackedScene = load("res://beam_spine.tscn")
 var clone_asset: PackedScene = load("res://clone.tscn")
 
 @onready var ABILITYTIMER: Timer = $AbilityTimer
-@export var ability_delay: float = 7.00
+@export var ability_delay: float = 12.00
 @onready var PRIMARYTIMER: Timer = $PrimaryTimer
 @export var primary_delay: float = 5.00
 
 const SPEED: float = 300.0
 var direction: Vector2 = Vector2.ZERO
-var look_at: Vector2 = Vector2.ZERO
 var beam: Line2D
 var clone: Clone
 
 func _process(delta:float):
-	# When active attack, activate ability
+	# When active_1, beam attack
 	if Input.is_action_just_pressed("active_1") and PRIMARYTIMER.is_stopped():
 		beam = beam_spine_asset.instantiate()
 		beam.look_at(get_global_mouse_position())
@@ -25,15 +24,12 @@ func _process(delta:float):
 			clone.add_child(beam.duplicate())
 		PRIMARYTIMER.start(primary_delay)
 	
-	# When mobility kit, activate ability
+	# When active_2, spawn clone
 	if Input.is_action_just_pressed("active_2") and ABILITYTIMER.is_stopped():
 		clone_spawn()
 		ABILITYTIMER.start(ability_delay)
 
 func _physics_process(delta: float) -> void:
-	# Look at mouse
-	look_at = get_global_mouse_position()
-	transform = transform.looking_at(look_at)
 	
 	# Get axis input
 	direction.x = Input.get_axis("player_left", "player_right")
@@ -47,6 +43,14 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 	direction = Vector2.ZERO
 
+# Consume the clone to reposition
+func clone_teleport():
+	if clone:
+		var temp = position
+		position = clone.position
+		clone.queue_free()
+
+# Spawn a clone
 func clone_spawn() -> void:
 	clone = clone_asset.instantiate()
 	clone.position = get_global_mouse_position()

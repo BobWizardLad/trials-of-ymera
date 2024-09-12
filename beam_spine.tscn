@@ -11,7 +11,7 @@ offsets = PackedFloat32Array(0, 0.273333, 0.486667, 0.746667, 1)
 colors = PackedColorArray(1, 1, 0, 1, 0.27451, 1, 1, 1, 0.486275, 1, 0.486275, 1, 0, 0.768627, 0.768627, 1, 1, 0, 0, 1)
 
 [node name="BeamSpine" type="Line2D"]
-points = PackedVector2Array(0, 0, 100, 0, 200, 0, 300, 0, 400, 0, 500, 0)
+points = PackedVector2Array(0, 0, 100, 0)
 width = 40.0
 width_curve = SubResource("Curve_4xtth")
 gradient = SubResource("Gradient_dnn0m")
@@ -19,6 +19,8 @@ joint_mode = 2
 begin_cap_mode = 1
 end_cap_mode = 2
 script = ExtResource("1_nexdo")
+
+[node name="Area2D" type="Area2D" parent="."]
 
 [node name="Lifespan" type="Timer" parent="."]
 one_shot = true
