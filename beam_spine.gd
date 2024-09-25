@@ -11,7 +11,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	# Adjust length to mouse pos
 	for each in range(0, points.size()):
-		points[each] = each * get_local_mouse_position() * 1.4
+		points[each] = each * get_local_mouse_position() * 1.1
 
 func _on_lifespan_timeout() -> void:
 	queue_free()

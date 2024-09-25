@@ -1,7 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://bjcb2kitmpyf0"]
+[gd_scene load_steps=5 format=3 uid="uid://bjcb2kitmpyf0"]
 
 [ext_resource type="Script" path="res://player_body.gd" id="1_hq1lh"]
 [ext_resource type="Texture2D" uid="uid://eihqmgwdcwlx" path="res://icon.svg" id="2_qkgey"]
+[ext_resource type="PackedScene" uid="uid://ieh0jmxr5yst" path="res://enemy.tscn" id="3_cipmi"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_y5bgr"]
+vertices = PackedVector2Array(1121.91, 616, 20.3984, 616.992, 43.6094, 31.9297, 1117.08, 25.0625)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(7, 14, 1127, 15, 1132, 626, 10, 627)])
 
 [node name="main" type="Node2D"]
 
@@ -17,3 +23,20 @@ one_shot = true
 
 [node name="PrimaryTimer" type="Timer" parent="PlayerBody"]
 one_shot = true
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_y5bgr")
+
+[node name="Enemy" parent="." instance=ExtResource("3_cipmi")]
+position = Vector2(994, 459)
+
+[node name="MoveTo" type="Button" parent="."]
+offset_left = 542.0
+offset_top = 61.0
+offset_right = 612.0
+offset_bottom = 92.0
+text = "MoveTo"
+
+[connection signal="pressed" from="MoveTo" to="Enemy" method="_move_to" binds= [Vector2(400, 400)]]
+
+[editable path="Enemy"]
